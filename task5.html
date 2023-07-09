@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/nullstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>task5</title>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page__container">
+        <div class="task">
+          <div class="task__condition text">
+            Задача 7. Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+            <ul>
+              <li>1) за весь рік;</li>
+              <li>2) у першій половині року;</li>
+              <li>3) у другій половині року;</li>
+              <li>4) за літо;</li>
+              <li>5) за ІІ квартал;</li>
+              <li>6) за парні місяці (з парними номерами);</li>
+              <li>7) за місяці, які є початковими у сезоні (весна, літо, осінь, зима).</li>
+            </ul>
+          </div>
+        </div>
+        <script>
+          let firstMounth = 1
+          let secondMounth = 2
+          let lastMounth = 12
+          let lasMounthOfFirstPartYear = 6
+          let mounthOfEndOfSummer = 8
+          let startOfSecondQuarter = 4
+          let startSpring = 3
+          let stepOne = 1
+          let stepTwo = 2
+          let stepThree = 3
+          // функція яка виводит у масив всі платіжки користувача за кожен місяць року
+          function gePeyment() {
+            let yearPayment = []
+            for (let i = 1; i <= 12; i++) {
+              let mountPeyment = parseInt(prompt(`Введіть платіж за ${i}-й місяць `))
+              yearPayment[i] = mountPeyment // не хотів push бо думмаю що в подальшому буде легше рахувати коли значення будуть з 1 починатись а не з 0 (памятаю що 0 існує як пуста ячейка )
+            }
+            return yearPayment
+          }
+          // функція яка знаходить суми (старався зробити одну яка буде рахувати суми які потрібно знайти просто пердавши в них значення треба було мабуть так і в першому завданні зробити)
+          function getSumOfPaymentForPeiriod(startperiod, endPeriod, yearPeyment, step) {
+            let sum = 0
+            for (let i = startperiod; i <= endPeriod; i += step) {
+              sum += yearPeyment[i]
+            }
+            return sum
+          }
+          let userPaymentDuringTheYear = gePeyment()
+          //===
+          let sumOfPeymentForYear = getSumOfPaymentForPeiriod(firstMounth, lastMounth, userPaymentDuringTheYear, stepOne)
+          //====
+          let sumOfPeymentForFirstPartOfYear = getSumOfPaymentForPeiriod(firstMounth, lasMounthOfFirstPartYear, userPaymentDuringTheYear, stepOne)
+          //===
+          let sumOfPeymentForSecondPartOfYear = getSumOfPaymentForPeiriod(lasMounthOfFirstPartYear, lastMounth, userPaymentDuringTheYear, stepOne)
+          //===
+          let sumOfPeymentForSummer = getSumOfPaymentForPeiriod(lasMounthOfFirstPartYear, mounthOfEndOfSummer, userPaymentDuringTheYear, stepOne)
+          //===
+          let sumOfSecondQuarter = getSumOfPaymentForPeiriod(startOfSecondQuarter, lasMounthOfFirstPartYear, userPaymentDuringTheYear, stepOne)
+          //===
+          let sumOfEvenMounth = getSumOfPaymentForPeiriod(secondMounth, lastMounth, userPaymentDuringTheYear, stepTwo)
+          //===
+          let sumOfFirstMounthOfSeason = getSumOfPaymentForPeiriod(startSpring, lastMounth, userPaymentDuringTheYear, stepThree)
+
+          document.write(`
+            Сума платежів за увесь рік  = ${sumOfPeymentForYear} <br/>
+            <br/>
+            Сума платежів за перше півріччя = ${sumOfPeymentForFirstPartOfYear} <br/>
+            <br/>
+            Сума платежів за друге півріччя = ${sumOfPeymentForSecondPartOfYear} <br/>
+            <br/>
+            Сума платежів за літо = ${sumOfPeymentForSummer} <br/>
+            <br/>
+            Сума платежів за ІІ квартал = ${sumOfSecondQuarter} <br/>
+            <br/>
+            Сума платежів за парні місяці (з парними номерами) = ${sumOfEvenMounth} <br/>
+            <br/>
+            Сума платежів за місяці, які є початковими у сезоні (весна, літо, осінь, зима)  = ${sumOfFirstMounthOfSeason}
+          `)
+          console.log(userPaymentDuringTheYear)
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

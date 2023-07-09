@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/nullstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>task1</title>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page__container">
+        <div class="task">
+          <div class="task__condition text">
+            Задача 2. Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:
+            <ul>
+              <li> номери днів, протягом яких кількість відвідувачів була меншою за 20;</li>
+              <li> номери днів, коли кількість відвідувачів була мінімальною;</li>
+              <li> загальну кількість клієнтів у робочі дні та окремо загальну кількість днів навихідних.</li>
+            </ul>
+          </div>
+        </div>
+        <script>
+          // Функція яка вводить у масив кількіст відвідувачів кожного дня
+          function getMemebersCountOnEchDayOfTheWeek() {
+            let memberCount = []
+            for (let i = 0; i < 7; i++) {
+              let membersInOneDay = parseInt(prompt(`cкільки відвідувачів було протягом ${i + 1}-го дня `))
+              memberCount.push(membersInOneDay)
+            }
+            return memberCount
+          }
+          // функція яка знаходить у який день кількість відвідувачів була меншою за 20
+          function getDaysMemeberLessThen20(weekMembers) {
+            let daysLessThen20 = ""
+            for (let i = 0; i < 7; i++) {
+              if (weekMembers[i] < 20) {
+                daysLessThen20 += i + 1 + ", "
+              }
+            }
+            return daysLessThen20
+          }
+          //функція яка знаходить дні коли кількість відвідувачів була мінімальною (я вирішив знайти 2 дні у яких наймеше відвідувачів було)
+          function getMinAmountsOfMembers(weekMembers) {
+            let minOne = Infinity
+            let minTwo = Infinity
+            let minWeekNumberOne = 0
+            let minWeekNumberTwo = 0
+            for (let i = 0; i < 7; i++) {
+              if (minOne > weekMembers[i]) {
+                minOne = weekMembers[i]
+                minWeekNumberOne += i + 1 - minWeekNumberOne
+              }
+            }
+            for (let i = 0; i < 7; i++) {
+              if (weekMembers[i] !== minOne && minTwo > weekMembers[i]) {
+                minTwo = weekMembers[i]
+                minWeekNumberTwo += i + 1 - minWeekNumberTwo
+              }
+            }
+            let weeksNumbersInWichWereMinMembers = `${minWeekNumberOne}-й день = ${minOne} , ${minWeekNumberTwo}-й день = ${minTwo} `
+            return weeksNumbersInWichWereMinMembers
+          }
+          // функці яка знаходить кількість клієнтів в робочі дні та вихідні
+          function getMembersInWorkAndOffDays(weekMembers) {
+            let allmembersInWeek = 0
+            let memebersInWorkDays = 0
+
+            for (let i = 0; i < 7; i++) {
+              allmembersInWeek += weekMembers[i]
+              if (i > 4) continue
+              memebersInWorkDays = allmembersInWeek
+            }
+            let memebersInOffDays = allmembersInWeek - memebersInWorkDays
+            return `у робочі дні було ${memebersInWorkDays} а у вихідні ${memebersInOffDays} вівдвідувачів`
+          }
+          // присвоюємо змінним обрахунки функцій
+          let membersOnEchDayOfTheWeek = getMemebersCountOnEchDayOfTheWeek()
+          let daysMemeberLessThen20 = getDaysMemeberLessThen20(membersOnEchDayOfTheWeek)
+          let minAmountsOfMembers = getMinAmountsOfMembers(membersOnEchDayOfTheWeek)
+          let membersInWorkAndOffDays = getMembersInWorkAndOffDays(membersOnEchDayOfTheWeek)
+          document.write(` кількість відвідувачів була меншою за 20 у ${daysMemeberLessThen20} днях <br/>
+          <br/>
+         кількість відвідувачів була мінімальноу в ${minAmountsOfMembers} <br/>
+         <br/>
+         ${membersInWorkAndOffDays}
+          `)
+          console.log(membersOnEchDayOfTheWeek)
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

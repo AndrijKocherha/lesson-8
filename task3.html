@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/nullstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>task3</title>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page__container">
+        <div class="task">
+          <div class="task__condition text">
+            Задача 4. Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :
+            <ul>
+              <li>• починаються на букву «А»;</li>
+              <li>• перша і остання літери співпадають;</li>
+              <li>• складаються з більше ніш 5 символів;</li>
+            </ul>
+          </div>
+        </div>
+        <script>
+          // Функція яка знаходить номер що починається на Літеру "A"
+          function getnumbersWiсhFirstLetterA(numbers) {
+            let numberWichStartFronletterA = " "
+            for (let i = 0; i < numbers.length; i++) {
+              if (numbers[i][0] === "A") numberWichStartFronletterA += `<br/>` + numbers[i] + "<br/>"
+            }
+            return numberWichStartFronletterA
+          }
+          // Функція яка знаходить номера де перша і остання літери співпадають
+          function getNumbersWithSimilarStartAndEnd(numbers) {
+            let simalarStartAndEnd = ""
+            let firstNum
+            for (let i = 0; i < numbers.length; i++) {
+              firstNum = numbers[i][0]
+              if (numbers[i].endsWith(firstNum)) simalarStartAndEnd += `<br/>` + numbers[i] + "<br/>"
+            }
+            return simalarStartAndEnd
+          }
+          // функція яка виводить номери в яких більше 5 символів
+          function getNumberWichAreLongerThen5(numbers) {
+            let numbersMoreThen5 = ""
+            for (let i = 0; i < numbers.length; i++) {
+              if (numbers[i].length > 5) numbersMoreThen5 += `<br/>` + numbers[i] + "<br/>"
+            }
+            return numbersMoreThen5
+          }
+          let carNumbers = ["GH0000JG", "H56K", "BС90L", "J77777LL", "AK45L", "KD9786LK", "AO55A", "A65L"]
+          let numbersStartFromLetterA = getnumbersWiсhFirstLetterA(carNumbers)
+          let numbersWithSimilarStartAndEnd = getNumbersWithSimilarStartAndEnd(carNumbers)
+          let numberWichAreLongerThen5 = getNumberWichAreLongerThen5(carNumbers)
+          document.write(`Номера які починаються на літеру A:   ${numbersStartFromLetterA} <br/>
+            <br/>
+            Номера у яких перша і остання літери однакові:    ${numbersWithSimilarStartAndEnd} <br/>
+            <br/>
+            номера кількість символів яких довша пятии:    ${numberWichAreLongerThen5}
+            `)
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

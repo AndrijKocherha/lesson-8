@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/nullstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>task7</title>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page__container">
+        <div class="task">
+          <div class="task__condition text">
+            Задача 9. Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів. Комп’ютер довільно розміщує ці одиночні
+            кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди
+            стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.
+          </div>
+        </div>
+        <script>
+          function getCeillsWithShips(cellsCount, shipsCount) {
+            let cells = new Array(cellsCount)
+            let previousCeils = []
+            // заповнюємо масив кораблями
+            firstСycle: for (shipsCount; shipsCount > 0; shipsCount--) {
+              let firstField = 0
+              let randomCell = firstField + Math.floor(Math.random() * (cellsCount - firstField))
+              //це я зробив для того щоб по 2 корабля в одну клітинку не присвоювались ( якби так було то коли ми вказуємо 15 клітинок і  наприклад 6 кораблів то їх може бути 5 або 4 )
+              for (let f = 0; f < previousCeils.length; f++) {
+                if (previousCeils[f] === randomCell) {
+                  shipsCount++
+                  continue firstСycle
+                }
+              }
+              previousCeils.push(randomCell)
+              cells[randomCell] = 1
+            }
+            // заповнємо пусті комірки масиву нулями
+            for (let i = 0; i < cellsCount; i++) {
+              if (cells[i] == undefined) {
+                cells[i] = 0
+              }
+            }
+            return cells
+          }
+          //===
+          function playGame(cellsWithShips, shipsCount) {
+            do {
+              let userShot = parseInt(prompt(`вистріліть ввівши число від 1 до ${cellsWithShips.length} `))
+              if (cellsWithShips[userShot - 1] === 1) {
+                shipsCount -= 1
+                alert(`ви попали!!! кількіть кораблів яку залишилось збити = ${shipsCount}`)
+              } else {
+                alert(`ви  не попали :( кількіть кораблів яку залишилось збити = ${shipsCount}`)
+              }
+            } while (shipsCount > 0)
+            alert("гра закінчкеа ви збили всі кораблі ")
+          }
+          let userAmountOfCells = parseInt(prompt("Введіть кількість клітинок"))
+          let amountOfShips = parseInt(prompt("Введіть кількість кораблів"))
+          let fieldWithShips = getCeillsWithShips(userAmountOfCells, amountOfShips)
+          playGame(fieldWithShips, amountOfShips)
+          console.log(fieldWithShips)
+        </script>
+      </div>
+    </main>
+  </body>
+</html>

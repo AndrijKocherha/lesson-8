@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/nullstyle.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>task6</title>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page__container">
+        <div class="task">
+          <div class="task__condition text">
+            Задача 8. Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500). Надаючи
+            користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити сумарний виграш.
+          </div>
+        </div>
+        <script>
+          function playGame() {
+            let questionToUser
+            let resultOfGame
+            do {
+              resultOfGame
+              let userOveralWin = 0
+              let prizes = []
+              let userWin
+              for (let i = 1; i <= 4; i++) {
+                let minWin = -500
+                let maxWin = 500
+                let randomWin = minWin + Math.floor(Math.random() * (maxWin - minWin + 1))
+                prizes[i] = randomWin //тут знову вирішив від 1 вставляти числа щоб користувач вибирав не від 0 а від 1
+              }
+              let userGuess = parseInt(prompt("виберіть число від 1 до  4 (включно)"))
+              if (userGuess > 4 || userGuess < 1) {
+                resultOfGame = "ви ввели число не в діапазоні від 1 до 4"
+                return resultOfGame
+              }
+              userWin = prizes[userGuess]
+              userOveralWin += userWin
+              alert(`ви виграли ${userWin}`)
+              questionToUser = confirm("продовжуєм грати ?")
+              if (questionToUser === false) {
+                if (userOveralWin > 0) {
+                  resultOfGame = ` ви виграли ${userOveralWin} копійок`
+                } else if (userOveralWin === 0) {
+                  resultOfGame = `ви нічого не виграли і не програли`
+                } else {
+                  resultOfGame = `ви програли ${userOveralWin} копійок`
+                }
+              }
+            } while (questionToUser === true)
+            return resultOfGame
+          }
+          let userResultOfGame = playGame()
+          document.write(`${userResultOfGame}`)
+        </script>
+      </div>
+    </main>
+  </body>
+</html>
